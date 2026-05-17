@@ -50,6 +50,16 @@ while true; do
             fi
             ;;
 
+        3) 
+            read -p "Введите текущий путь: " old_path
+            read -p "Введите новое имя/путь: " new_path
+            if [[ -e "$old_path" ]]; then
+                mv "$old_path" "$new_path" && check_status
+            else
+                echo "Объект не найден."
+            fi
+            ;;
+
         5)
             read -p "Введите путь: " path
             echo "Подсказка: r=4, w=2, x=1"
