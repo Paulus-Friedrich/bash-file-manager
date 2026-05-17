@@ -2,7 +2,7 @@
 
 # Функция проверки результата выполнения команды 
 check_status(){
-    if [ $? -eq 0 ]; then
+    if [[ $? -eq 0 ]]; then
         echo "Операция выполнена успешно."
     else
         echo "Ошибка выполнения операции."
@@ -25,7 +25,21 @@ while true; do
     echo "============================================="
     read -p "Выберите действие (1-7): " choice
 
-    #case $choice in
+    case $choice in
+        1)
+            read -p "Введите путь (для каталога добавьте '/' в конце): " path
+            if [[ "$path" == */ ]]; then
+                mkdir -p "$path" && echo "Каталог создан: $path"
+            else 
+                touch "$path" && echo "Файл создан: $path"
+            fi
+            ;;
 
+        #2)
+        #    read -p "Введите путь (для каталога добавьте '/' в конце): " path
+        #    if [[ "$path" == */ ]]; then
+        #        rm -r "$path" && 
+
+    esac
 
 done 
