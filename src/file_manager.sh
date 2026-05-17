@@ -25,6 +25,7 @@ while true; do
     echo "============================================="
     read -p "Выберите действие (1-7): " choice
 
+    # аналог switch-case 
     case $choice in
         1)
             read -p "Введите путь (для каталога добавьте '/' в конце): " path
@@ -35,11 +36,20 @@ while true; do
             fi
             ;;
 
-        #2)
-        #    read -p "Введите путь (для каталога добавьте '/' в конце): " path
-        #    if [[ "$path" == */ ]]; then
-        #        rm -r "$path" && 
+        5)
+            read -p "Введите путь: " path
+            echo "Подсказка: r=4, w=2, x=1"
+            read -p "Введите права доступа в восьмеричном формате (напр. 744): " perms
+            # Проверка - существует ли объект вообще
+            if [[ -e "$path" ]]; then
+                chmod "$perms" "$path" && check_status
+                echo "Результат: " && ls -l "$path"
+            else
+                echo "Объект не найден."
+            fi
+            ;;
 
     esac
 
+    read -p "Нажмите Enter, чтобы вернуться в меню..." tmp
 done 
